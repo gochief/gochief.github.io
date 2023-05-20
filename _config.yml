@@ -1,0 +1,55 @@
+title:            gochief
+description:      "Hi，我是 Gochief，是一个后端工程师，会一点 Go / Python，喜欢折腾各种新技术。"
+
+github: gochief
+
+
+url: 
+menu:
+  - title: 'Categories'
+    url: '/categories.html'
+  - title: 'About'
+    url: '/about'
+  - title: 'Weekly'
+    url: ''
+  - title: 'Github'
+    url: 'https://github.com/gochief'
+  - title: 'RSS'
+    url: '/feed.xml'
+
+timezone:    Africa/El_Aaiun
+locale:      zh_CN
+lang:      zh-cmn-Hans
+future:      true
+highlighter: rouge
+markdown:    kramdown
+sass:
+  sass_dir: _sass
+  style: compressed
+
+permalink:   /:year-:month-:day/:title.html
+assetUrl: 
+defaultImage: data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+
+
+
+paginate: 10
+post_ext: md
+page_ext: md
+post_layout: post
+page_layout: page
+titlecase: true
+
+showBuyCoffee: true
+payImage: //
+
+include: [".htaccess"]
+exclude: ["Gemfile", "Gemfile.lock", "README.md", "LICENSE", "package.json","node_modules"]
+gems:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+
+plugins:
+  - jekyll-paginate
+  - jekyll-pdf-embed
