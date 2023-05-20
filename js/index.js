@@ -1,5 +1,5 @@
 /**
- * Created by Tw93 on 2017/1/31.
+ * Created by gochief on 2017/1/31.
  */
 window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
