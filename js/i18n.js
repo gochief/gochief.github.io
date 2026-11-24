@@ -35,6 +35,9 @@
     if (!valid(next)) return;
     language = next;
     document.documentElement.lang = next === 'en' ? 'en' : 'zh-CN';
+    document.querySelectorAll('[data-language]').forEach(function (element) {
+      element.hidden = element.getAttribute('data-language') !== next;
+    });
     if (persist) {
       try { window.localStorage.setItem(storageKey, next); } catch (error) {}
     }
