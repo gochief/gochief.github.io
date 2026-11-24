@@ -25,6 +25,7 @@
     const innerWidth = window.innerWidth;
     const innerAspect = innerWidth / innerHeight;
     const writeDom = document.getElementById('write');
+    if (!writeDom) return;
     let zoom = 1;
     if (innerAspect > defaultAspect) {
       zoom = innerHeight / window.screen.height;
@@ -58,7 +59,7 @@
     if (sections.length < 1) {
       return;
     }
-    sections.forEach((item) => {
+    Array.from(sections).forEach((item) => {
       if (item.childElementCount === 1) {
         item.classList.add('section-center');
         item.classList.add('center');

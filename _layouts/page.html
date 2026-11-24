@@ -1,16 +1,17 @@
 <!doctype html>
-<html class="no-js" lang="{{site.lang}}">
+<html lang="{{ site.lang }}">
 {% include head.html %}
 <body id="page">
 {% include header.html %}
-<div id="main" role="main">
+<main id="main" tabindex="-1">
   <article class="hentry">
-    <div class="entry-content">
-      {{ content }}
+    <div class="entry-content heti">
+      <h1>{% include translate.html key=page.title_key zh=page.title en=page.title_en %}</h1>
+      {% include localized-content.html %}
     </div>
     {% include giscus.html %}
   </article>
-</div>
+</main>
 {% include footer.html %}
 </body>
 </html>

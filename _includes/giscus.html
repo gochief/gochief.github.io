@@ -1,18 +1,19 @@
-{% if page.comments != false %}
+{% if page.comments != false and site.giscus.repo.size > 0 and site.giscus.repo_id.size > 0 and site.giscus.category.size > 0 and site.giscus.category_id.size > 0 %}
 <div class="giscus-container">
 <script
   src="https://giscus.app/client.js"
-  data-repo="gochief"
-  data-repo-id="MDEwOlJlcG9zaXRvcnkzMDE4NDU1NQ=="
-  data-category="General"
-  data-category-id="DIC_kwDOAcyUa84CSbZ-"
+  data-repo="{{ site.giscus.repo | escape }}"
+  data-repo-id="{{ site.giscus.repo_id | escape }}"
+  data-category="{{ site.giscus.category | escape }}"
+  data-category-id="{{ site.giscus.category_id | escape }}"
   data-mapping="title"
   data-strict="0"
   data-reactions-enabled="1"
   data-emit-metadata="0"
   data-input-position="bottom"
   data-lang="zh-CN"
-  data-theme="https://gw.alipayobjects.com/os/k/9z78d6/comment.css"
+  data-theme="{{ '/css/comment.css' | absolute_url }}"
+  data-loading="lazy"
   crossorigin="anonymous"
   async
 ></script>

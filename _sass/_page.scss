@@ -26,7 +26,10 @@ iframe {
   }
 }
 
-.hentry h1.entry-title{
+.hentry h1.entry-title,
+.hentry h2.entry-title {
+  @include font-rem(21);
+  margin: 16px 0;
   @media #{$medium} {
     @include font-rem(28);
   }
@@ -70,7 +73,8 @@ iframe {
         bottom: -20px;
         left: -20px;
       }
-      &:hover {
+      &:hover,
+      &:focus {
         .qr-code {
           width: 128px;
           opacity: 1;
@@ -438,13 +442,25 @@ iframe {
   height: 260px;
   background: $header-color;
   display: none;
-  svg {
-    margin-top: 60px;
+  .hero-title {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 120px 24px 40px;
+    color: $white;
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.4;
+    font-weight: bold;
+    text-align: center;
+    pointer-events: none;
   }
   canvas {
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
   }
   @media #{$medium} {
     display: block;
@@ -457,38 +473,82 @@ iframe {
   left: 0;
   width: 100%;
   z-index: 20;
-  overflow: hidden;
+  overflow: visible;
   background-color: $menu-top;
   height: $menu-height;
   box-shadow: 0 0 0 0, 0 6px 12px rgba($black, 0.1);
-  padding: 0 8px;
+  padding: 0;
   @media #{$medium} {
     position: fixed;
     padding: 0;
-    @include transition(0.3s height ease-out);
+    @include transition(0.3s transform ease-out);
   }
   ul {
-    margin: 0 auto;
+    margin: 0;
     list-style-type: none;
     height: 100%;
     padding: 0;
-    @media #{$large} {
-      max-width: 950px;
-    }
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
   }
+}
+
+.header-menu-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 950px;
+  height: 100%;
+  padding: 0 8px;
+  margin: 0 auto;
+}
+
+.language-toggle {
+  flex-shrink: 0;
+  min-width: 52px;
+  height: 36px;
+  padding: 6px 10px;
+  border: 1px solid $border-color;
+  border-radius: 3px;
+  background: $white;
+  color: $text-color;
+  font-family: $base-font;
+  font-size: 14px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+
+.ppt-language {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 30;
 }
 
 .header-menu-overflow {
   @media #{$medium} {
-    height: 0;
+    transform: translateY(-100%);
   }
+}
+
+.header-menu:focus-within {
+  transform: translateY(0);
 }
 
 .header-item,
 .header-item-title {
-  float: right;
-  padding-left: 8px;
-  padding-right: 8px;
+  flex-shrink: 0;
+  padding-left: 6px;
+  padding-right: 6px;
   @media #{$medium} {
     padding-left: 20px;
     padding-right: 20px;
@@ -497,9 +557,12 @@ iframe {
     vertical-align: middle;
     display: table-cell;
     height: $menu-height;
-    @include font-rem(16);
+    @include font-rem(14);
     box-sizing: border-box;
     font-weight: bold;
+    @media #{$medium} {
+      @include font-rem(16);
+    }
     &:visited {
       color: $text-color;
     }
@@ -526,30 +589,20 @@ iframe {
 
 .header-item {
   height: 100%;
-  &:nth-child(2),
-  &:nth-child(3) {
-    display: none;
-  }
-  @media #{$large} {
-    display: block;
-    &:nth-child(2),
-    &:nth-child(3) {
-      display: block;
-    }
-  }
 }
 
 .header-item-title {
-  float: left;
+  margin-right: auto;
   border-top-width: 0px;
   height: 100%;
   a.title {
-    @include font-rem(24);
+    @include font-rem(22);
     padding-left: 5px;
     vertical-align: middle;
     height: $menu-height;
     @media #{$medium} {
       display: table-cell;
+      @include font-rem(24);
     }
   }
 }

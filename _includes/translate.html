@@ -1,0 +1,3 @@
+{%- assign text_zh = site.data.i18n.zh[include.key] | default: include.zh -%}
+{%- assign text_en = site.data.i18n.en[include.key] | default: include.en | default: text_zh -%}
+<span data-language="zh" lang="zh-CN">{{ text_zh | escape }}</span><span data-language="en" lang="en">{{ text_en | escape }}</span>
