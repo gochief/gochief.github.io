@@ -1,10 +1,11 @@
-{% if site.showBuyCoffee != false %}
+{% if site.showBuyCoffee != false and site.coffee_url and site.coffee_url != '' %}
 <div class="coffee">
   <a
     class="buy-me-coffee"
-    href=""
+    href="{{ site.coffee_url | escape }}"
     target="_blank"
-    >喜欢文章 → ❤️</a
+    rel="noopener noreferrer"
+    >{% include translate.html key='support' %}</a
   >
 </div>
 {% endif %}

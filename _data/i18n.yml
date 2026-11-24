@@ -1,0 +1,42 @@
+zh:
+  home_tagline: 保持好奇，持续探索。
+  categories: 分类
+  categories_description: 按分类浏览文章。
+  about: 关于
+  about_me: 关于我
+  github: GitHub
+  rss: RSS
+  main_navigation: 主导航
+  skip_content: 跳到主要内容
+  switch_language: Switch to English
+  pagination: 文章分页
+  previous: 上一页
+  next: 下一页
+  read_more: 继续阅读
+  categories_label: 分类：
+  qr_code: 当前文章二维码
+  support: 喜欢文章 → ❤️
+  not_found_title: 404 · 页面没有找到
+  not_found_message: 链接可能已失效，可以回到首页继续阅读。
+  back_home: 返回首页
+en:
+  home_tagline: Stay curious. Keep exploring.
+  categories: Categories
+  categories_description: An archive of posts sorted by category.
+  about: About
+  about_me: About Me
+  github: GitHub
+  rss: RSS
+  main_navigation: Main navigation
+  skip_content: Skip to content
+  switch_language: 切换为中文
+  pagination: Post pagination
+  previous: Previous
+  next: Next
+  read_more: Read More
+  categories_label: "Categories: "
+  qr_code: QR code for this article
+  support: Enjoyed the article? → ❤️
+  not_found_title: 404 · Page not found
+  not_found_message: This link may be out of date. Head back to the home page to keep reading.
+  back_home: Back to home

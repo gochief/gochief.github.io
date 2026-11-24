@@ -1,26 +1,26 @@
 <!doctype html>
-<html class="no-js" lang="{{site.lang}}">
+<html lang="{{ site.lang }}">
 {% include head.html %}
 <body id="post">
 {% include header.html %}
-<div id="main" role="main">
+<main id="main" tabindex="-1">
   <article class="hentry">
-    <div class="entry-content">
-      <h1 class="post-title entry-title">{{ page.title }}</h1>
-      <h4 class="page-info">
-        <span>Categories:&nbsp;&nbsp;{{page.categories}}</span>
+    <div class="entry-content heti">
+      <h1 class="post-title entry-title">{% include translate.html zh=page.title en=page.title_en %}</h1>
+      <div class="page-info">
+        <span>{% include translate.html key='categories_label' %}{{ page.categories | join: ', ' | escape }}</span>
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
-        <div class="qr-text" id="J_qr_text">
-          <div id="J_qr_code" class="qr-code" onmouseover="this.title='';"></div>
+        <div class="qr-text" id="J_qr_text" tabindex="0" role="img" aria-label="当前文章二维码" data-i18n="qr_code" data-i18n-attr="aria-label">
+          <div id="J_qr_code" class="qr-code"></div>
         </div>
-      </h4>
-      {{ content }}
+      </div>
+      {% include localized-content.html %}
       {% include buy-me-coffee.html %}
     </div>
     {% include giscus.html %}
     {% include read-more.html %}
   </article>
-</div>
+</main>
 {% include footer.html %}
 </body>
 </html>

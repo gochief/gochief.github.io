@@ -1,6 +1,10 @@
 ---
 layout: home
+permalink: /404.html
+sitemap: false
 title: Oh! gochief seems to be out of order...
+title_key: not_found_title
+description_key: not_found_message
 description: 'Oh!, gochief seems to be out of order...'
 comments: false
 is404: true
@@ -439,8 +443,26 @@ is404: true
   #link:hover {
     opacity: 1;
   }
+  .error-help {
+    margin: 20px 16px 48px;
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    .error-page {
+      height: 340px;
+      margin: 20px 0;
+    }
+    .error-page .text {
+      font-size: clamp(8rem, 55vw, 18rem);
+      top: 50%;
+    }
+    .error-page .container {
+      top: 60%;
+      transform: translate(-50%, -50%) scale(0.6);
+    }
+  }
 </style>
-<div class="error-page">
+<div class="error-page" aria-hidden="true">
   <div class="text"><p>404</p></div>
   <div class="container">
     <!-- caveman left -->
@@ -481,3 +503,8 @@ is404: true
     </div>
   </div>
 </div>
+<section class="error-help">
+  <h1>{% include translate.html key='not_found_title' %}</h1>
+  <p>{% include translate.html key='not_found_message' %}</p>
+  <a href="{{ '/' | relative_url }}" class="btn">{% include translate.html key='back_home' %}</a>
+</section>

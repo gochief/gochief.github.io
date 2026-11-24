@@ -1,26 +1,30 @@
 title:            gochief
 description:      "Hi，我是 Gochief，是一个后端工程师，会一点 Go / Python，喜欢折腾各种新技术。"
+description_en: "Hi, I'm Gochief, a backend engineer who works with Go and Python and enjoys exploring new technologies."
 
 github: gochief
 
 
-url: 
+url: "https://gochief.github.io"
+baseurl: ""
 menu:
   - title: 'Categories'
+    key: categories
     url: '/categories.html'
   - title: 'About'
-    url: '/about'
-  - title: 'Weekly'
-    url: ''
+    key: about
+    url: '/about/'
   - title: 'Github'
+    key: github
     url: 'https://github.com/gochief'
   - title: 'RSS'
+    key: rss
     url: '/feed.xml'
 
-timezone:    Africa/El_Aaiun
+timezone:    Asia/Shanghai
 locale:      zh_CN
-lang:      zh-cmn-Hans
-future:      true
+lang:      zh-CN
+future:      false
 highlighter: rouge
 markdown:    kramdown
 sass:
@@ -34,6 +38,7 @@ defaultImage: data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAIC
 
 
 paginate: 10
+paginate_path: "/page:num/"
 post_ext: md
 page_ext: md
 post_layout: post
@@ -41,15 +46,35 @@ page_layout: page
 titlecase: true
 
 showBuyCoffee: true
-payImage: //
+coffee_url: ""
+
+# Fill all four fields using https://giscus.app before enabling comments.
+giscus:
+  repo: ""
+  repo_id: ""
+  category: ""
+  category_id: ""
 
 include: [".htaccess"]
-exclude: ["Gemfile", "Gemfile.lock", "README.md", "LICENSE", "package.json","node_modules"]
-gems:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-feed
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - License
+  - package.json
+  - package-lock.json
+  - node_modules
+  - vendor
+  - scripts
+  - tests
 
 plugins:
   - jekyll-paginate
+  - jekyll-sitemap
   - jekyll-pdf-embed
+
+defaults:
+  - scope:
+      path: "js/**"
+    values:
+      sitemap: false

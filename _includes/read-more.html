@@ -1,11 +1,11 @@
 {% if page.previous.url and site.related_posts.size > 0 and page.previous.hide !=true%}
-<a class="read-more" href="{{ site.url }}{{ page.previous.url }}" title="{{ page.previous.url.title }}">
+<a class="read-more" href="{{ page.previous.url | relative_url }}" title="{{ page.previous.title | escape }}">
   <div class="read-more-header">
-    <div  class="read-more-btn">Read More</div>
+    <div class="read-more-btn">{% include translate.html key='read_more' %}</div>
   </div>
   <div class="read-more-content">
-    <h3>{{ page.previous.title}}</h3>
-    <p>【{{ page.previous.date | date: "%Y-%m-%d" }}】{% if page.previous.summary %}{{ page.previous.summary }}{% endif %}</p>
+    <h3>{% include translate.html zh=page.previous.title en=page.previous.title_en %}</h3>
+    <p>【{{ page.previous.date | date: "%Y-%m-%d" }}】{% include translate.html zh=page.previous.summary en=page.previous.summary_en %}</p>
   </div>
 </a>
 {% endif %}

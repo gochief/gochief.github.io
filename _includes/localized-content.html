@@ -1,0 +1,6 @@
+{% if page.content_en %}
+<div data-language="zh" lang="zh-CN">{{ content }}</div>
+<div data-language="en" lang="en">{{ page.content_en | markdownify | replace: 'id="', 'id="en-' | replace: 'href="#', 'href="#en-' }}</div>
+{% else %}
+{{ content }}
+{% endif %}

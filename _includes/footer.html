@@ -1,70 +1,18 @@
 <div class="footer-wrapper">
-  <footer role="contentinfo">
-    &copy; 2014~{{ site.time | date: '%Y' }}&nbsp;
-    <img src="https://cdn.fliggy.com/upic/a1THPC.png" class="github-icon" alt="github"/>
-    <a
-      href="https://github.com/gochief/gochief.github.io"
-      rel="nofollow"
-      target="_blank"
-      class="need_dotted"
-      > gochief </a
-    >
+  <footer>
+    &copy; 2024–{{ site.time | date: '%Y' }}&nbsp;
+    <img src="https://cdn.fliggy.com/upic/a1THPC.png" class="github-icon" alt="" width="20" height="20" loading="lazy" decoding="async">
+    <a href="https://github.com/gochief/gochief.github.io" rel="noopener noreferrer" target="_blank" class="need_dotted">gochief</a>
   </footer>
 </div>
-
-<script type="text/javascript" src="{{ site.url }}/js/index.min.js"></script>
-<script type="text/javascript" src="https://gw.alipayobjects.com/os/k/h3/heti-addon.min.js"></script>
-
+<script src="https://gw.alipayobjects.com/os/k/h3/heti-addon.min.js" defer></script>
+<script src="{{ '/js/index.js' | relative_url }}" defer></script>
 {% if site.google_analytics %}
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-57207999-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics | uri_escape }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
-  gtag('config', 'UA-57207999-1');
+  gtag('config', {{ site.google_analytics | jsonify }});
 </script>
 {% endif %}
-
-{% if page.url=="/" %}
-<script>
-  function hereDoc(f) {
-    return f
-      .toString()
-      .replace(/^[^\/]+\/\*!?\s?/, '')
-      .replace(/\*\/[^\/]+$/, '');
-  }
-  var string = hereDoc(function () {
-    /*
-
-
-    _                               ___                  _____           _       _
-   | |                             |_  |                /  ___|         (_)     | |
-   | |     ___  __ _ _ __ _ __       | | __ ___   ____ _\ `--.  ___ _ __ _ _ __ | |_
-   | |    / _ \/ _` | '__| '_ \      | |/ _` \ \ / / _` |`--. \/ __| '__| | '_ \| __|
-   | |___|  __/ (_| | |  | | | | /\__/ / (_| |\ V / (_| /\__/ / (__| |  | | |_) | |_
-   \_____/\___|\__,_|_|  |_| |_| \____/ \__,_| \_/ \__,_\____/ \___|_|  |_| .__/ \__|
-
-
-   This is gochief's front-end technology blog, Commonly used to record learning and research front-end technology, Concerned about new technology and new thinking.
-   */
-  });
-  console.log(string);
-</script>
-{% endif %}
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var links = document.links;
-    for (var i = 0; i < links.length; i++) {
-      if (
-        links[i].hostname != window.location.hostname ||
-        (links[i].href && links[i].href.indexOf('feed.xml') != -1)
-      ) {
-        links[i].target = '_blank';
-      }
-    }
-    //字距优化
-    const heti = new Heti('.heti');
-    heti.autoSpacing();
-  });
-</script>

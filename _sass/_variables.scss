@@ -4,7 +4,7 @@
 $base-font: 'LXGW WenKai Screen R', Calibri, Arial, sans-serif;
 $heading-font: $base-font;
 $caption-font: $base-font;
-$code-font: $base-font;
+$code-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 $alt-font: serif;
 
 $doc-font-size: 15;
@@ -13,7 +13,6 @@ $doc-line-height: 27.2;
 // set-up the body font-size / line-height
 body {
   font-size: 0px + $doc-font-size;
-  font-display: swap;
   -webkit-font-smoothing: antialiased;
 }
 

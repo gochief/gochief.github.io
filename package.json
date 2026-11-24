@@ -1,7 +1,8 @@
 {
   "name": "gochief",
   "author": "GC<gochief@qq.com>",
-  "homepage": "https://gochief.fun",
+  "private": true,
+  "homepage": "https://gochief.github.io",
   "repository": {
     "type": "git",
     "url": "https://github.com/gochief/gochief.github.io"
@@ -10,12 +11,13 @@
     "url": "https://github.com/gochief/gochief.github.io/issues"
   },
   "scripts": {
-    "dev": "bundle exec jekyll serve --watch",
+    "dev": "bundle exec jekyll serve --livereload",
     "start": "npm run dev",
     "build": "bundle exec jekyll build",
-    "min": "uglifyjs ./js/index.js -o ./js/index.min.js  --comments all"
+    "test": "node --test tests/*.test.js",
+    "check": "npm test && npm run build && python3 scripts/check_site.py"
   },
-  "devDependencies": {
-    "uglify-js": "^2.7.5"
+  "engines": {
+    "node": ">=22"
   }
 }

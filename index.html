@@ -1,19 +1,21 @@
 ---
 layout: home
-title: "Be yourself and don't go with the flow."
-description: "gochief"
+title: "Stay curious. Keep exploring."
+title_key: home_tagline
 comments: false
 ---
 
+<h1 class="visuallyhidden">{{ site.title | escape }}</h1>
 {% for post in paginator.posts %}
 {% if post.hide != true %}
-<a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url" class="header-href">
+<a href="{{ post.url | relative_url }}" rel="bookmark" title="{{ post.title | escape }}" class="header-href">
   <article class="hentry">
-      <h1 class="entry-title">
-          {{post.title }}
-      </h1>
+      <h2 class="entry-title">{% include translate.html zh=post.title en=post.title_en %}</h2>
     <div class="entry-content">
-      <span class="index-content-time">【{{ post.date | date: "%Y-%m-%d" }}】</span>{{ post.summary }}
+      <time class="index-content-time" datetime="{{ post.date | date_to_xmlschema }}">【{{ post.date | date: "%Y-%m-%d" }}】</time>
+      {% assign summary_zh = post.summary | default: post.excerpt | strip_html | truncate: 160 %}
+      {% assign summary_en = post.summary_en | default: summary_zh | strip_html | truncate: 160 %}
+      {% include translate.html zh=summary_zh en=summary_en %}
     </div>
   </article>
 </a>
