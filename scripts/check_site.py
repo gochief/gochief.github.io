@@ -5,7 +5,7 @@ import json
 from email.utils import parsedate_to_datetime
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import unquote, urljoin, urlsplit
+from urllib.parse import parse_qs, unquote, urljoin, urlsplit
 import xml.etree.ElementTree as ET
 
 
@@ -74,10 +74,15 @@ def check_site(directory, baseurl):
         canonical = page.canonicals[0]
         origin = urlsplit(canonical)
         assert origin.scheme == "https" and origin.netloc, f"{page.path}: non-absolute canonical"
+        asset_versions = set()
         for reference in page.references:
             target = urlsplit(urljoin(canonical, reference))
             if target.scheme not in ("http", "https") or target.netloc != origin.netloc:
                 continue
+            if target.path.endswith((".css", ".js")):
+                version = parse_qs(target.query).get("v", [])
+                assert len(version) == 1 and version[0], f"{page.path}: unversioned asset: {reference}"
+                asset_versions.add(version[0])
             path = unquote(target.path)
             if baseurl:
                 assert path == baseurl or path.startswith(baseurl + "/"), f"{page.path}: link misses baseurl: {reference}"
@@ -90,6 +95,7 @@ def check_site(directory, baseurl):
             if target.fragment and destination in pages:
                 fragment = unquote(target.fragment)
                 assert fragment in pages[destination].ids, f"{page.path}: missing anchor: {reference}"
+        assert len(asset_versions) == 1, f"{page.path}: mixed or missing asset versions"
 
     feed = ET.parse(root / "feed.xml").getroot()
     assert feed.tag == "rss"

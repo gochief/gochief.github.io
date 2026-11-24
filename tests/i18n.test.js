@@ -20,6 +20,8 @@ function page(options = {}) {
   const storage = new Map(options.saved ? [['gochief.language', options.saved]] : []);
   const button = element({ 'data-i18n': 'switch_language', 'data-i18n-attr': 'aria-label' });
   const navigation = element({ 'data-i18n': 'main_navigation', 'data-i18n-attr': 'aria-label' });
+  const chinese = element({ 'data-language': 'zh' });
+  const english = element({ 'data-language': 'en' });
   const metadata = Object.fromEntries([
     'meta[name="description"]', 'meta[property="og:title"]', 'meta[property="og:description"]',
     'meta[property="og:locale"]', 'meta[name="twitter:title"]', 'meta[name="twitter:description"]'
@@ -46,6 +48,7 @@ function page(options = {}) {
     },
     querySelectorAll(selector) {
       if (selector === '[data-i18n-attr]') return [button, navigation];
+      if (selector === '[data-language]') return [chinese, english];
       if (selector === 'iframe.giscus-frame') return [{ contentWindow: { postMessage: (...args) => posted.push(args) } }];
       return [];
     },
@@ -67,7 +70,7 @@ function page(options = {}) {
     }
   });
   vm.runInNewContext(source, { window, document });
-  return { window, document, storage, button, navigation, metadata, posted, comments };
+  return { window, document, storage, button, navigation, metadata, posted, comments, chinese, english };
 }
 
 test('restores saved preference before content is parsed', () => {
@@ -82,8 +85,12 @@ test('restores saved preference before content is parsed', () => {
 test('switches both ways and persists the choice for later pages', () => {
   const result = page();
   assert.equal(result.document.documentElement.lang, 'zh-CN');
+  assert.equal(result.chinese.hidden, false);
+  assert.equal(result.english.hidden, true);
   result.button.dispatch('click');
   assert.equal(result.document.documentElement.lang, 'en');
+  assert.equal(result.chinese.hidden, true);
+  assert.equal(result.english.hidden, false);
   assert.equal(result.storage.get('gochief.language'), 'en');
   assert.equal(result.document.title, 'About - gochief');
   assert.equal(result.navigation.getAttribute('aria-label'), 'Main navigation');
@@ -96,6 +103,8 @@ test('switches both ways and persists the choice for later pages', () => {
   assert.equal(result.document.documentElement.lang, 'zh-CN');
   assert.equal(result.storage.get('gochief.language'), 'zh');
   assert.equal(result.document.title, '关于 - gochief');
+  assert.equal(result.chinese.hidden, false);
+  assert.equal(result.english.hidden, true);
 });
 
 test('uses the browser language on first visit and ignores unsupported preferences', () => {

@@ -91,3 +91,5 @@ python3 scripts/check_site.py _site-preview --baseurl /preview
 ```
 
 不要提交 `_site/`、`vendor/` 或本地 Bundler 配置。依赖版本由 `Gemfile.lock` 固定。
+
+本地 CSS 和 JavaScript 使用统一的构建版本参数，避免发布后新版 HTML 命中旧资源缓存。在 GitHub Pages 上优先使用构建提交号，其他环境使用构建时间。
