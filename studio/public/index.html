@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <title>gochief · 本地写作台</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<svg class="icon-library" aria-hidden="true"><defs>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.7" cy="10.7" r="6.7"/><path d="m16 16 4.5 4.5"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12l4 4v12a2 2 0 0 1-2 2ZM7 3v6h10V3M7 21v-8h10v8"/></symbol>
+  <symbol id="i-git" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="6" r="2"/><path d="M6 7v10m12-9a7 7 0 0 1-7 7H6"/></symbol>
+  <symbol id="i-columns" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="m15 5 4 4M4 20l5-1L20 8a2.8 2.8 0 0 0-4-4L5 15z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 8a8.5 8.5 0 1 0 0 8M20 3v5h-5"/></symbol>
+  <symbol id="i-open" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="m10 13 4-4m-7 6-1 1a4 4 0 0 0 6 6l4-4a4 4 0 0 0 0-6m1-3 1-1a4 4 0 0 0-6-6L8 6a4 4 0 0 0 0 6" transform="translate(0 -1)"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 20"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></symbol>
+</defs></svg>
+<div class="app" id="app" data-layout="split">
+  <aside class="sidebar" aria-label="文章列表">
+    <div class="brand"><span class="brand-mark">g.</span><div><strong>gochief</strong><span>WRITING STUDIO</span></div><span class="local-badge"><i></i>本地</span></div>
+    <button class="new-button" id="newDraft"><svg class="icon"><use href="#i-plus"/></svg>写一篇新文章<span class="keycap">N</span></button>
+    <label class="search"><svg class="icon"><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索文章…" aria-label="搜索文章"></label>
+    <div class="library-title"><span>我的文章</span><span id="articleCount">—</span></div>
+    <nav id="articleList" class="article-list" aria-label="选择文章"><p class="list-empty">正在载入文章…</p></nav>
+    <div class="sidebar-footer">
+      <div class="repository"><svg class="icon"><use href="#i-git"/></svg><div><strong id="branchName">正在连接…</strong><span>当前提交分支</span></div></div>
+      <p>保持好奇，持续探索。</p>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="workspace-heading"><button class="icon-button sidebar-toggle" id="sidebarToggle" aria-label="打开文章列表"><svg class="icon"><use href="#i-menu"/></svg></button><span>写作台</span><span class="heading-slash">/</span><strong id="documentName">载入中</strong></div>
+      <div class="topbar-actions">
+        <span class="save-state" id="saveState" role="status"><i></i>准备就绪</span>
+        <button class="button secondary" id="saveDraft" disabled><svg class="icon"><use href="#i-save"/></svg><span>保存草稿</span></button>
+        <button class="button primary" id="reviewSubmit" disabled><span>提交到 GitHub</span><svg class="icon"><use href="#i-arrow"/></svg></button>
+      </div>
+    </header>
+    <section class="workspace-toolbar">
+      <div class="language-tabs" role="tablist" aria-label="编辑语言">
+        <button type="button" role="tab" aria-selected="true" data-language="zh">中文原文</button>
+        <button type="button" role="tab" aria-selected="false" data-language="en">英文版本<span class="optional-tag">可选</span></button>
+      </div>
+      <div class="view-switch" role="group" aria-label="工作区布局">
+        <button class="icon-button active" data-layout="split" aria-label="双栏显示" aria-pressed="true" title="双栏显示"><svg class="icon"><use href="#i-columns"/></svg></button>
+        <button class="icon-button" data-layout="edit" aria-label="专注编辑" aria-pressed="false" title="专注编辑"><svg class="icon"><use href="#i-edit"/></svg></button>
+        <button class="icon-button" data-layout="preview" aria-label="专注预览" aria-pressed="false" title="专注预览"><svg class="icon"><use href="#i-eye"/></svg></button>
+      </div>
+    </section>
+    <div class="workspace" id="workspace">
+      <section class="editor-panel" aria-label="文章编辑">
+        <div class="editor-meta">
+          <label class="sr-only" for="articleTitle" id="titleLabel">文章标题</label>
+          <input id="articleTitle" class="title-input" placeholder="给这个想法起个标题…" maxlength="250" autocomplete="off" disabled>
+          <label class="summary-label" for="articleSummary" id="summaryLabel">摘要</label>
+          <textarea id="articleSummary" class="summary-input" placeholder="用一两句话介绍这篇文章，会显示在博客首页。" rows="2" disabled></textarea>
+          <details class="article-settings">
+            <summary><span>文章设置</span><span id="settingsOverview">日期 · 分类 · 地址</span><span class="chevron">⌄</span></summary>
+            <div class="settings-grid">
+              <label>文章日期<input id="articleDate" type="date" disabled></label>
+              <label>分类<input id="articleCategories" placeholder="Go, 技术笔记" disabled><small>多个分类用逗号分隔</small></label>
+              <label class="full-row">文章地址<input id="articleSlug" placeholder="my-first-post" disabled><small id="slugHint">用于文章文件名，首次提交后固定。</small></label>
+              <div class="full-row checkbox-row"><label><input id="articleComments" type="checkbox" disabled>允许评论</label><label><input id="articleHidden" type="checkbox" disabled>从文章列表隐藏</label></div>
+            </div>
+          </details>
+        </div>
+        <div class="markdown-toolbar" role="toolbar" aria-label="Markdown 格式">
+          <button type="button" data-format="heading" title="二级标题" aria-label="插入二级标题"><strong>H₂</strong></button>
+          <button type="button" data-format="bold" title="加粗" aria-label="加粗"><strong>B</strong></button>
+          <button type="button" data-format="italic" title="斜体" aria-label="斜体"><em>I</em></button>
+          <span class="toolbar-divider"></span>
+          <button type="button" data-format="link" title="链接" aria-label="插入链接"><svg class="icon"><use href="#i-link"/></svg></button>
+          <button type="button" data-format="code" title="代码块" aria-label="插入代码块"><svg class="icon"><use href="#i-code"/></svg></button>
+          <button type="button" data-format="quote" title="引用" aria-label="插入引用">❞</button>
+          <span class="markdown-label">MARKDOWN</span>
+        </div>
+        <label class="sr-only" for="articleBody">Markdown 正文</label>
+        <textarea id="articleBody" class="body-input" placeholder="从一个想法开始。&#10;&#10;在这里写下正文，右侧会呈现博客中的真实效果。&#10;&#10;支持 Markdown 标题、列表、链接和代码块。" spellcheck="false" disabled></textarea>
+        <footer class="editor-footer"><span id="wordCount">0 字 · 约 1 分钟阅读</span><span>⌘ / Ctrl S 保存</span></footer>
+      </section>
+      <section class="preview-panel" aria-label="博客预览">
+        <header class="preview-toolbar"><div><svg class="icon"><use href="#i-eye"/></svg><strong>站点预览</strong><span class="preview-dot"></span></div>
+          <div class="preview-tools">
+            <div class="preview-language" role="group" aria-label="预览语言"><button data-preview-language="zh" aria-pressed="true">中</button><button data-preview-language="en" aria-pressed="false">EN</button></div>
+            <select id="previewDevice" aria-label="预览尺寸"><option value="responsive">自适应</option><option value="mobile">手机</option></select>
+            <button class="icon-button" id="refreshPreview" title="重新生成预览" aria-label="重新生成预览"><svg class="icon"><use href="#i-refresh"/></svg></button>
+            <a class="icon-button disabled" id="openPreview" target="_blank" rel="noopener noreferrer" title="在新标签页打开完整预览" aria-label="打开完整预览"><svg class="icon"><use href="#i-open"/></svg></a>
+          </div>
+        </header>
+        <div class="preview-note" id="previewNote">与博客使用同一套主题和排版。</div>
+        <div class="preview-stage" id="previewStage">
+          <iframe id="previewFrame" title="博客文章真实预览" sandbox="allow-scripts" hidden></iframe>
+          <div class="preview-placeholder" id="previewPlaceholder"><span class="preview-illustration"><svg class="icon"><use href="#i-file"/></svg><i></i></span><h2>让想法变成一篇文章</h2><p>写下标题和正文，预览会在这里自动更新。</p><span class="preview-help">你的草稿只保存在本机</span></div>
+          <div class="preview-loading" id="previewLoading" hidden><span class="spinner"></span><span>正在生成博客预览…</span></div>
+        </div>
+        <footer class="preview-footer"><span id="previewStatus">等待内容</span><span>Jekyll · 原站主题</span></footer>
+      </section>
+    </div>
+    <div class="error-banner" id="errorBanner" role="alert" hidden><span id="errorText"></span><button id="retryBoot" hidden>重新连接</button><button class="icon-button" id="dismissError" aria-label="关闭错误提示"><svg class="icon"><use href="#i-close"/></svg></button></div>
+  </main>
+</div>
+<dialog id="reviewDialog" class="review-dialog">
+  <form method="dialog" class="dialog-close-form"><button class="icon-button" aria-label="关闭提交窗口"><svg class="icon"><use href="#i-close"/></svg></button></form>
+  <div class="dialog-heading"><span class="eyebrow">READY TO SHARE</span><h2 id="reviewTitle">检查并提交</h2><p id="reviewDescription">确认这篇文章的改动，再将它提交到当前分支。</p></div>
+  <div class="submission-target"><svg class="icon"><use href="#i-git"/></svg><strong id="reviewBranch"></strong><span id="reviewFilename"></span></div>
+  <div class="production-notice" id="productionNotice" hidden>当前分支是网站的主分支。推送后，GitHub Pages 可能自动更新公开网站。</div>
+  <div class="diff-header"><span>文章改动</span><span id="diffCount"></span></div>
+  <pre class="diff-view" id="reviewDiff" tabindex="0"></pre>
+  <label class="commit-label">提交说明<input id="commitMessage" maxlength="300" autocomplete="off"></label>
+  <div class="submit-options"><label><input type="checkbox" id="pushChanges" checked>同时推送到 GitHub</label><span>只提交当前文章文件</span></div>
+  <p id="reviewError" class="review-error" role="alert" hidden></p>
+  <footer class="dialog-footer"><button class="button secondary" id="cancelSubmit">继续编辑</button><button class="button primary" id="confirmSubmit">确认提交并推送<svg class="icon"><use href="#i-arrow"/></svg></button></footer>
+</dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>

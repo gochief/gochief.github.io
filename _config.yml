@@ -67,6 +67,8 @@ exclude:
   - vendor
   - scripts
   - tests
+  - studio
+  - 启动写作台.command
 
 plugins:
   - jekyll-paginate

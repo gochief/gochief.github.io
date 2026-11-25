@@ -108,7 +108,7 @@ def check_site(directory, baseurl):
     sitemap = ET.parse(root / "sitemap.xml").getroot()
     for location in sitemap.findall("{*}url/{*}loc"):
         assert urlsplit(location.text).scheme == "https"
-    for excluded in ("Gemfile", "README.md", "License", "package.json", "scripts", "tests", "vendor"):
+    for excluded in ("Gemfile", "README.md", "License", "package.json", "scripts", "tests", "vendor", "studio", ".blog-studio", "启动写作台.command"):
         assert not (root / excluded).exists(), f"Development file copied into site: {excluded}"
     print(f"Checked {len(pages)} HTML pages, RSS, sitemap, local links and assets.")
 
