@@ -93,7 +93,7 @@
         if (particle.alpha <= 0 || particle.y > height) return false;
         context.beginPath();
         context.arc(particle.x, particle.y, 5, 0, Math.PI * 2);
-        context.fillStyle = 'white';
+        context.fillStyle = '#327368';
         context.globalAlpha = particle.alpha;
         context.fill();
         return true;

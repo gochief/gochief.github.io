@@ -1,4 +1,16 @@
 zh:
+  hero_eyebrow: 后端工程师 · 终身学习者
+  hero_line_one: 保持好奇
+  hero_line_two: 持续探索
+  more_about_me: 认识一下我
+  latest_posts: 最近的记录
+  browse_archive: 浏览分类
+  uncategorized: 随笔
+  personal_journal: 个人笔记
+  article_header: 在文字里，留住思考。
+  archive_intro: 把零散的思考，整理成可以回访的路径。
+  footer_note: 写代码，也记录生活。慢慢来，持续生长。
+  subscribe_rss: 订阅 RSS
   home_tagline: 保持好奇，持续探索。
   categories: 分类
   categories_description: 按分类浏览文章。
@@ -20,6 +32,18 @@ zh:
   not_found_message: 链接可能已失效，可以回到首页继续阅读。
   back_home: 返回首页
 en:
+  hero_eyebrow: BACKEND ENGINEER · LIFELONG LEARNER
+  hero_line_one: Stay curious
+  hero_line_two: Keep exploring
+  more_about_me: A little about me
+  latest_posts: Recent writing
+  browse_archive: Browse topics
+  uncategorized: Journal
+  personal_journal: PERSONAL JOURNAL
+  article_header: A space to think in words.
+  archive_intro: Small thoughts, collected into paths worth revisiting.
+  footer_note: Writing code. Collecting moments. Always growing.
+  subscribe_rss: Subscribe via RSS
   home_tagline: Stay curious. Keep exploring.
   categories: Categories
   categories_description: An archive of posts sorted by category.

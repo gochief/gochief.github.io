@@ -3,22 +3,34 @@ layout: home
 title: "Stay curious. Keep exploring."
 title_key: home_tagline
 comments: false
+home: true
 ---
 
-<h1 class="visuallyhidden">{{ site.title | escape }}</h1>
+<section class="journal" aria-labelledby="journal-heading">
+<div class="section-heading">
+  <h2 id="journal-heading">{% include translate.html key='latest_posts' %}<span class="section-index"> / 01</span></h2>
+  <a class="text-link" href="{{ '/categories.html' | relative_url }}">{% include translate.html key='browse_archive' %} <span aria-hidden="true">↗</span></a>
+</div>
 {% for post in paginator.posts %}
 {% if post.hide != true %}
 <a href="{{ post.url | relative_url }}" rel="bookmark" title="{{ post.title | escape }}" class="header-href">
   <article class="hentry">
-      <h2 class="entry-title">{% include translate.html zh=post.title en=post.title_en %}</h2>
-    <div class="entry-content">
-      <time class="index-content-time" datetime="{{ post.date | date_to_xmlschema }}">【{{ post.date | date: "%Y-%m-%d" }}】</time>
+    <div class="post-meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+      <span class="post-category">{% if post.categories.size > 0 %}{{ post.categories | first | escape }}{% else %}{% include translate.html key='uncategorized' %}{% endif %}</span>
+    </div>
+    <div class="post-preview">
+      <h3 class="entry-title">{% include translate.html zh=post.title en=post.title_en %}</h3>
+      <p class="post-summary">
       {% assign summary_zh = post.summary | default: post.excerpt | strip_html | truncate: 160 %}
       {% assign summary_en = post.summary_en | default: summary_zh | strip_html | truncate: 160 %}
       {% include translate.html zh=summary_zh en=summary_en %}
+      </p>
     </div>
+    <span class="post-arrow" aria-hidden="true">↗</span>
   </article>
 </a>
 {% endif %}
 {% endfor %}
 {% include pagination.html %}
+</section>

@@ -1,8 +1,11 @@
 <div class="footer-wrapper">
   <footer>
+    <p class="footer-note">{% include translate.html key='footer_note' %}</p>
+    <div class="footer-bottom"><span>
     &copy; 2024–{{ site.time | date: '%Y' }}&nbsp;
     <img src="{% include asset-url.html path='/assets/github.svg' %}" class="github-icon" alt="" width="20" height="20" loading="lazy" decoding="async">
     <a href="https://github.com/gochief/gochief.github.io" rel="noopener noreferrer" target="_blank" class="need_dotted">gochief</a>
+    </span><a class="footer-rss" href="{{ '/feed.xml' | relative_url }}">{% include translate.html key='subscribe_rss' %} <span aria-hidden="true">↗</span></a></div>
   </footer>
 </div>
 <script src="https://gw.alipayobjects.com/os/k/h3/heti-addon.min.js" defer></script>

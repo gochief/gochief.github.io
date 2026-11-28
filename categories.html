@@ -8,7 +8,7 @@ description: "An archive of posts sorted by category."
 comments: false
 hideHomeActive: true
 ---
-<h1 class="visuallyhidden">{% include translate.html key=page.title_key %}</h1>
+<p class="archive-intro">{% include translate.html key='archive_intro' %}</p>
 {% assign categories = site.categories | sort %}
 <ul class="entry-meta inline-list">
   {% for category in categories %}
@@ -33,7 +33,7 @@ hideHomeActive: true
     {% for post in visible_posts %}
     <li class="entry-title">
       <a href="{{ post.url | relative_url }}" title="{{ post.title | escape }}">
-        <time class="tag-time" datetime="{{ post.date | date_to_xmlschema }}">【{{ post.date | date: "%Y-%m-%d" }}】</time>{% include translate.html zh=post.title en=post.title_en %}</a>
+        <time class="tag-time" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>{% include translate.html zh=post.title en=post.title_en %}<span class="archive-arrow" aria-hidden="true">↗</span></a>
     </li>
     {% endfor %}
   </ul>
