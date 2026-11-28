@@ -8,7 +8,7 @@
     <div class="entry-content heti">
       <h1 class="post-title entry-title">{% include translate.html zh=page.title en=page.title_en %}</h1>
       <div class="page-info">
-        <span>{% include translate.html key='categories_label' %}{{ page.categories | join: ', ' | escape }}</span>
+        <span>{% include translate.html key='categories_label' %}{% if page.categories.size > 0 %}{{ page.categories | join: ', ' | escape }}{% else %}{% include translate.html key='uncategorized' %}{% endif %}</span>
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
         <div class="qr-text" id="J_qr_text" tabindex="0" role="img" aria-label="当前文章二维码" data-i18n="qr_code" data-i18n-attr="aria-label">
           <div id="J_qr_code" class="qr-code"></div>

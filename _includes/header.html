@@ -22,7 +22,29 @@
     {% include language-toggle.html %}
   </div>
 </nav>
-<header class="entry-header">
-  <p class="hero-title">{% include translate.html key=page.title_key zh=page.title en=page.title_en %}</p>
+<header class="entry-header{% if page.home %} home-hero{% endif %}">
+  <div class="hero-inner">
+    {% if page.home %}
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> {% include translate.html key='hero_eyebrow' %}</p>
+      <h1 class="hero-title">{% include translate.html key='hero_line_one' %}<br><span class="hero-accent">{% include translate.html key='hero_line_two' %}</span><span class="hero-period">.</span></h1>
+      <p class="hero-description">{% include translate.html zh=site.description en=site.description_en %}</p>
+      <a class="hero-link" href="{{ '/about/' | relative_url }}">{% include translate.html key='more_about_me' %}<span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+      <span class="orbit-core">g.</span><span class="orbit-satellite"></span>
+      <span class="art-coordinate">GO / PYTHON / LIFE</span>
+      <span class="art-caption">A little space for big ideas.</span>
+    </div>
+    {% else %}
+    <p class="eyebrow">GOCHIEF / {% include translate.html key='personal_journal' %}</p>
+    {% if page.layout == 'post' %}
+    <p class="hero-title">{% include translate.html key='article_header' %}</p>
+    {% else %}
+    <h1 class="hero-title">{% include translate.html key=page.title_key zh=page.title en=page.title_en %}</h1>
+    {% endif %}
+    {% endif %}
+  </div>
   <canvas id="J_firework_canvas" aria-hidden="true"></canvas>
 </header>
